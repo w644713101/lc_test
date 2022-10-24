@@ -33,3 +33,29 @@
 链接：https://leetcode.cn/problems/k-th-symbol-in-grammar
 
 """
+import math
+if __name__ == '__main__':
+    n = 3
+    k = 3
+    floor = math.pow(2, n-1)
+    all_node = math.pow(2, n) - 1
+    find_node = all_node - floor + k
+    parity = []
+    now = find_node
+    for _ in range(n-1):
+        parity.append(int(now%2))
+        now = int(now/2)
+    zero_map = {"0": 0, "1": 1}
+    one_map = {"0": 1, "1": 0}
+    res_value = 0
+    parity.reverse()
+    for value in parity:
+        if res_value == 0:
+            res_value = zero_map[str(value)]
+        else:
+            res_value = one_map[str(value)]
+
+    print(res_value)
+
+
+
