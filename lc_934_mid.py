@@ -33,10 +33,20 @@ from typing import List
 if __name__ == '__main__':
     grid = [[0,1],[1,0]]
 
-"""no"""
 class Solution:
     def shortestBridge(self, grid: List[List[int]]) -> int:
-        """official"""
+        """
+        official
+        广度优先遍历
+            1.正常遍历每个顶点, 如果顶点不是1就跳过
+            2.如果顶点是1,就访问1周围的顶点, 如果周围还有1就放入队列, 不是1就跳过, 并且把访问过的1设置为-1(防止重复访问)
+                周围 for nx, ny in (x+1, y), (x-1, y), (x, y+1), (x, y-1)
+                该步的目的是找到两个岛中的其中一个岛, 把一个岛存入 is_land 变量
+            3.遍历找到的岛, 把遍历的岛进行 广度优先遍历,找到step
+                若广度找到的是 0 就是要建的桥
+                若广度找到的是-1 就是之前访问过的岛
+                若逛到找到的是 1 就是要返回的step
+        """
         n = len(grid)
         for i, row in enumerate(grid):
             for j, v in enumerate(row):
